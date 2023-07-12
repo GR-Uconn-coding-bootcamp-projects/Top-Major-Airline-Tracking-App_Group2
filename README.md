@@ -1,4 +1,4 @@
-# group2-project-1
+# Top Major Airline Tracking App - Group2
 ## Description
 
 Info coming soon.
