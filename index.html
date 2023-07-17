@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+    <!-- <style>
     header.hero {
       padding-top: 20px;
       border-bottom: 5px solid black;
@@ -26,107 +35,133 @@
     .card-height {
       height: 500px;
     }
-  </style>
-  <title>Top Major Airline Flight Tracking App</title>
-</head>
+  </style> -->
+    <title>Top Major Airline Flight Tracking App</title>
+  </head>
 
-<body>
-  <header class="hero text-center">
-    <h1 class="card-title">
-      Top Major Airline Tracker
-    </h1>
-    <p>Click on one of the major airlines below to retrieve flight information</p>
-  </header>
+  <body>
+    <header class="hero text-center">
+      <h1 class="card-title">Top Major Airline Tracker</h1>
+      <p>
+        Click on one of the major airlines below to retrieve flight information
+      </p>
+    </header>
 
-  <main class="container-fluid">
+    <main class="container-fluid">
+      <!-- need to adjust this code to align better with the page -->
+      <!-- make button text/font size bigger -->
+      <div class="row row-padding">
+        <div class="col-lg-3 col-md-4 col-12">
+          <div class="card mb-4 bg-dark-subtle shadow-lg">
+            <div class="card-body smaller-card-body active">
+              <p>
+                Date and Time:
+                <input type="text" id="datetimepicker" class="form-control" />
+              </p>
+            </div>
+          </div>
 
-    <!-- need to adjust this code to align better with the page -->
-    <!-- make button text/font size bigger -->
-    <div class="row row-padding">
-      <div class="col-lg-3 col-md-4 col-12">
-
-        <div class="card mb-4 bg-dark-subtle shadow-lg">
-          <div class="card-body smaller-card-body active">
-            <p>Date and Time: <input type="text" id="datetimepicker" class="form-control"></p>
+          <div class="card bg-black shadow-lg">
+            <div class="card-body bg-steel-grey">
+              <h2 class="subtitle text-white text-center fs-4">
+                Top 5 Major Airlines List:
+              </h2>
+              <div
+                id="language-buttons"
+                class="d-flex flex-column align-items-center"
+              >
+                <button
+                  data-language="DL"
+                  class="btn btn-primary btn-lg mb-2 fs-6 w-75"
+                >
+                  Delta Airlines
+                </button>
+                <button
+                  data-language="UA"
+                  class="btn btn-primary btn-lg mb-2 fs-6 w-75"
+                >
+                  United Airlines
+                </button>
+                <button
+                  data-language="AA"
+                  class="btn btn-primary btn-lg mb-2 fs-6 w-75"
+                >
+                  American Airlines
+                </button>
+                <button
+                  data-language="B6"
+                  class="btn btn-primary btn-lg mb-2 fs-6 w-75"
+                >
+                  Jetblue
+                </button>
+                <button
+                  data-language="WN"
+                  class="btn btn-primary btn-lg mb-2 fs-6 w-75"
+                >
+                  Southwest Airlines
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="card bg-black shadow-lg">
-          <div class="card-body bg-steel-grey">
-            <h2 class="subtitle text-white text-center fs-4">Top 5 Major Airlines List:</h2>
-            <div id="language-buttons" class="d-flex flex-column align-items-center">
-              <button data-language="DL" class="btn btn-primary btn-lg mb-2 fs-6 w-75">Delta Airlines</button>
-              <button data-language="UA" class="btn btn-primary btn-lg mb-2 fs-6 w-75">United Airlines</button>
-              <button data-language="AA" class="btn btn-primary btn-lg mb-2 fs-6 w-75">American Airlines</button>
-              <button data-language="B6" class="btn btn-primary btn-lg mb-2 fs-6 w-75">Jetblue</button>
-              <button data-language="WN" class="btn btn-primary btn-lg mb-2 fs-6 w-75">Southwest Airlines</button>
+        <div class="col-lg-4 col-lg-6 col-12">
+          <div class="card mb-4 card-height shadow-lg">
+            <div class="card-body">
+              <h6 class="subtitle text-black align-items-start fs-5">Routes</h6>
+            </div>
+          </div>
 
+          <div class="card mb-4 p-3 bg-light shadow-lg">
+            <div class="ui-widget">
+              <label for="tags">Search by Destination:</label>
+              <input id="tags" class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col w-100 h-100">
+          <div class="card card-height shadow-lg">
+            <div class="card-body">
+              <h6 class="subtitle text-black text-center fs-7">
+                Selected Route Details:
+              </h6>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-lg-4 col-lg-6 col-12">
-        <div class="card mb-4 card-height shadow-lg">
-          <div class="card-body">
-            <h6 class="subtitle text-black align-items-start fs-5">Routes</h6>
-          </div>
-        </div>
+      <!-- Code to add another div container to display top 10 airline flight info  -->
+      <!-- Code to display destination and weather info-->
+    </main>
 
-        <div class="card mb-4 p-3 bg-light shadow-lg">
-          <div class="ui-widget">
-            <label for="tags">Search by Destination:</label>
-            <input id="tags" class="form-control">
-          </div>
-        </div>
-
-      </div>
-
-      <div class="col w-100 h-100">
-        <div class="card card-height shadow-lg">
-          <div class="card-body">
-            <h6 class="subtitle text-black text-center fs-7">Selected Route Details:</h6>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-
-    <!-- Code to add another div container to display top 10 airline flight info  -->
-    <!-- Code to display destination and weather info-->
-
-  </main>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script>
-    flatpickr("#datetimepicker", {
-      enableTime: true,
-      dateFormat: "Y-m-d\\TH:i:S.000\\Z",
-      time_24hr: true
-    });
-
-    $(function () {
-      var availableTags = [
-        "Boston, Massachusetts, USA (BOS)",
-        "Dallas, Texas, USA (DAL)",
-        "Dallas/Fort Worth, Texas, USA (DFW)",
-        "Hartford, CT, USA (BDL)",
-        "Los Angeles, CA, USA (LAX)",
-        "Orlando, FL, USA (MCO)",
-        "New York, USA (JFK)",
-        "New York, USA (LGA)",
-        "San Francisco, CA, USA (SFO)"
-      ];
-      $("#tags").autocomplete({
-        source: availableTags
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      flatpickr("#datetimepicker", {
+        enableTime: true,
+        dateFormat: "Y-m-d\\TH:i:S.000\\Z",
+        time_24hr: true,
       });
-    });
-  </script>
-  <script type="text/javascript" src="./assets/js/script.js"></script>
-  
-</body>
 
+      $(function () {
+        var availableTags = [
+          "Boston, Massachusetts, USA (BOS)",
+          "Dallas, Texas, USA (DAL)",
+          "Dallas/Fort Worth, Texas, USA (DFW)",
+          "Hartford, CT, USA (BDL)",
+          "Los Angeles, CA, USA (LAX)",
+          "Orlando, FL, USA (MCO)",
+          "New York, USA (JFK)",
+          "New York, USA (LGA)",
+          "San Francisco, CA, USA (SFO)",
+        ];
+        $("#tags").autocomplete({
+          source: availableTags,
+        });
+      });
+    </script>
+    <script type="text/javascript" src="./assets/js/script.js"></script>
+  </body>
 </html>
