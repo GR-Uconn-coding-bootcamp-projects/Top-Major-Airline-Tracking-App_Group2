@@ -15,9 +15,9 @@ https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-gi
 
 Info coming soon.
 
-Link to deployed live URL [here.](https://grosario1.github.io/)
+Link to deployed live URL [here.](https://gr-uconn-coding-bootcamp-projects.github.io/Top-Major-Airline-Tracking-App_Group2/)
 
-You can find code repo [here.](https://github.com/grosario1)
+You can find code repo [here.](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2)
 
 ## Credits
 
