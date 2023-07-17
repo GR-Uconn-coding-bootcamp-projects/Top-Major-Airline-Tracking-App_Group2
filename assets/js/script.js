@@ -1,5 +1,4 @@
 // Group-2 project-1 javascript code here
-
 // Function to fetch flight information based on the selected date and airline
 
 async function getFlightInfo(date, airline) {
