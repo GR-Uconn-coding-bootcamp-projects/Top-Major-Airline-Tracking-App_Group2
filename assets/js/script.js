@@ -45,16 +45,16 @@ function displayFlightData(flightData, flightTableElement) {
     // Create the table headers
     var tableHeaders = document.createElement("tr");
     tableHeaders.innerHTML =
-      '<th>Flight#</th><th>Date</th><th>Departure</th><th>Destination</th><th>Status</th>';
+      "<th>Flight#</th><th>Date</th><th>Departure</th><th>Destination</th><th>Status</th>";
     flightTable.appendChild(tableHeaders);
 
     // Populate the table rows with flight information
     flightData.forEach(function (flight) {
       var flightRow = document.createElement("tr");
       flightRow.innerHTML =
-        "<td>" +
+        "<td><a href='#'>" +
         flight.flnr +
-        "</td><td>" +
+        "</a></td><td>" +
         flight.date +
         "</td><td>" +
         flight.departure_ident +
@@ -70,7 +70,8 @@ function displayFlightData(flightData, flightTableElement) {
     flightTableElement.appendChild(flightTable);
   } else {
     // If no flight data available, display a message within the table
-    flightTableElement.innerHTML = '<p class="text-center">No flight information available.</p>';
+    flightTableElement.innerHTML =
+      '<p class="text-center">No flight information available.</p>';
   }
 }
 
@@ -92,7 +93,8 @@ function handleButtonClick() {
   flightTableElement.innerHTML = "";
 
   // Display loading message while fetching flight data
-  flightTableElement.innerHTML = '<p class="text-center">Loading flight information...</p>';
+  flightTableElement.innerHTML =
+    '<p class="text-center">Loading flight information...</p>';
 
   // Fetch flight data and display it
   getFlightInfo(selectedDate, selectedAirline)
@@ -102,7 +104,8 @@ function handleButtonClick() {
     })
     .catch(function (error) {
       console.error(error);
-      flightTableElement.innerHTML = '<p class="text-center">Failed to fetch flight information.</p>'; // Display error message
+      flightTableElement.innerHTML =
+        '<p class="text-center">Failed to fetch flight information.</p>'; // Display error message
     });
 }
 
