@@ -12,10 +12,11 @@ header.hero {
 }
 
 .bg-steel-grey {
-  background-color: darkgreen !important;
+  background-color: blue !important;
   color: white;
 }
 
 .card-height {
   height: 500px;
 }
+/* Change hover for buttons */
