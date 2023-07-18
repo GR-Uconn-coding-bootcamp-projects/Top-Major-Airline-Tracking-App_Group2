@@ -5,7 +5,7 @@ Building a Tracking App for Major Airlines using HTML, CSS, and JavaScript
 
 * The purpose of this app is that it allows users to track the weather of the destinations of their flight.
 
-* The user will be able to retrieve their flight information by choosing the Date and Time and one of the Top 5 Major Airlines (Delta Airlines, United Airlines, American Airlines, Jetblue, Southwest Airlines) in the interactive. 
+* The user will be able to retrieve their flight information by choosing the Date and Time and one of the Top 5 Major Airlines (Delta Airlines, United Airlines, American Airlines, Jetblue, Southwest Airlines). 
 
 * Once the airline flight destination information is retrieved by the specific time and date, the user will then be able to recieve the destination weather info card. The final outcome of this app for our users is to acquire the weather of their desired flight destination. 
 
