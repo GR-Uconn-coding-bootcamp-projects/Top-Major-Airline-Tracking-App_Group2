@@ -7,6 +7,10 @@ header.hero {
   font-weight: bold;
 }
 
+.card-body {
+  overflow-y: auto;
+}
+
 .row-padding {
   padding: 20px;
 }
@@ -18,4 +22,11 @@ header.hero {
 
 .card-height {
   height: 500px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  color: black;
 }
