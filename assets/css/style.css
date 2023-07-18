@@ -8,6 +8,10 @@ header.hero {
   font-weight: bold;
 }
 
+.card-body {
+  overflow-y: auto;
+}
+
 .row-padding {
   padding: 20px;
 }
@@ -21,18 +25,9 @@ header.hero {
   height: 500px;
 }
 
-.button:hover {
-background-color: rgb(253, 53, 53);
-}
-
-.button {
-  margin: 5px;
-  min-height: 15px;
-  min-width: 225px;
-  max-width: 225px;
-  top: 50%;
-  padding: 15px;
-  border-radius: 10px;
-  background-color: rgb(180, 209, 241);
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
   color: black;
 }

@@ -1,107 +1,114 @@
 // Group-2 project-1 javascript code here
+
 // Function to fetch flight information based on the selected date and airline
-
 function getFlightInfo(date, airline) {
-    var ident = airline.toLowerCase();
+  var ident = airline.toLowerCase();
 
-    var url = 'https://flightera-flight-data.p.rapidapi.com/airline/flights?ident=' + ident + '&time=' + date;
-    var options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '3717db3bafmsh3630d39920bf588p1025c6jsnd065f1276f3c',
-            'X-RapidAPI-Host': 'flightera-flight-data.p.rapidapi.com'
-        }
-    };
+  var url =
+    "https://flightera-flight-data.p.rapidapi.com/airline/flights?ident=" +
+    ident +
+    "&time=" +
+    date;
+  var options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "3717db3bafmsh3630d39920bf588p1025c6jsnd065f1276f3c",
+      "X-RapidAPI-Host": "flightera-flight-data.p.rapidapi.com",
+    },
+  };
 
-    try {
-        fetch(url, options).then(function (response) {
-            return response.json();
-        }).then(function (result) {
-            console.log(result);
+  return fetch(url, options)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (result) {
+      console.log("API response:", result); // Log the API response
 
-            // Process the flight information and update the page
-            var flightData = result.data;
-
-            var flightTable = document.createElement('table');
-            flightTable.classList.add('flight-table');
-
-            // Create the table headers
-            var tableHeaders = document.createElement('tr');
-            tableHeaders.innerHTML = '<th>Flight#</th><th>Date</th><th>Departure</th><th>Destination</th><th>Status</th>';
-            flightTable.appendChild(tableHeaders);
-
-            // Populate the table rows with flight information
-            flightData.forEach(function (flight) {
-                var flightRow = document.createElement('tr');
-                flightRow.innerHTML = '<td>' + flight.ident + '</td><td>' + flight.date + '</td><td>' + flight.departure + '</td><td>' + flight.destination + '</td><td>' + flight.status + '</td>';
-                flightTable.appendChild(flightRow);
-            });
-
-            // Find the "Routes" div card-body element
-            var routesDiv = document.querySelector('.card-body h6:contains("Routes")');
-            
-            // Append the flight table to the routesDiv
-            routesDiv.appendChild(flightTable);
-        }).catch(function (error) {
-            console.error(error);
-        });
-    } catch (error) {
-        console.error(error);
-    }
+      // Process the flight information and return the data
+      return result.flights; // Return the "flights" property from the result object
+    })
+    .catch(function (error) {
+      console.error(error);
+      throw error;
+    });
 }
 
-// Function to fetch flight details based on the ident code
-var datetimepicker = document.getElementById("datetimepicker");
+function displayFlightData(flightData, flightTableElement) {
+  // Clear any existing flight data
+  flightTableElement.innerHTML = "";
 
-function getFlightInfo(date, airline) {
-    var ident = airline.toLowerCase();
+  if (flightData && flightData.length > 0) {
+    // Create the flight table
+    var flightTable = document.createElement("table");
+    flightTable.classList.add("table"); // Add the "table" class for Bootstrap styling
 
-    var url = 'https://flightera-flight-data.p.rapidapi.com/airline/flights?ident=' + ident + '&time=' + date;
-    var options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '3717db3bafmsh3630d39920bf588p1025c6jsnd065f1276f3c',
-            'X-RapidAPI-Host': 'flightera-flight-data.p.rapidapi.com'
-        }
-    };
+    // Create the table headers
+    var tableHeaders = document.createElement("tr");
+    tableHeaders.innerHTML =
+      '<th>Flight#</th><th>Date</th><th>Departure</th><th>Destination</th><th>Status</th>';
+    flightTable.appendChild(tableHeaders);
 
-    try {
-        fetch(url, options).then(function (response) {
-            return response.text();
-        }).then(function (result) {
-            console.log(result);
-            // Processes the flight information and updates the page
-            var selectedRouteDetailsCard = document.querySelector(".card.card-height.shadow-lg");
-            selectedRouteDetailsCard.innerHTML = result; 
-        }).catch(function (error) {
-            console.error(error);
-        });
-    } catch (error) {
-        console.error(error);
-    }
+    // Populate the table rows with flight information
+    flightData.forEach(function (flight) {
+      var flightRow = document.createElement("tr");
+      flightRow.innerHTML =
+        "<td>" +
+        flight.flnr +
+        "</td><td>" +
+        flight.date +
+        "</td><td>" +
+        flight.departure_ident +
+        "</td><td>" +
+        flight.arrival_ident +
+        "</td><td>" +
+        flight.status +
+        "</td>";
+      flightTable.appendChild(flightRow);
+    });
+
+    // Append the flight table to the flightTableElement
+    flightTableElement.appendChild(flightTable);
+  } else {
+    // If no flight data available, display a message within the table
+    flightTableElement.innerHTML = '<p class="text-center">No flight information available.</p>';
+  }
 }
 
-// Event listener for datetimepicker
-datetimepicker.addEventListener("change", function () {
-    var selectedDate = this.value;
-    var selectedAirline = document.querySelector("#language-buttons button.selected")?.dataset.language;
-    if (selectedAirline) {
-        getFlightInfo(selectedDate, selectedAirline);
-    }
-});
+// Function to handle button click event
+function handleButtonClick() {
+  var selectedDate = datetimepicker.value;
+  var selectedAirline = this.dataset.language;
+
+  // Update the selected button style
+  airlineButtons.forEach(function (button) {
+    button.classList.remove("selected");
+  });
+  this.classList.add("selected");
+
+  // Find the flight table element
+  var flightTableElement = document.getElementById("flightTable");
+
+  // Clear any existing flight data
+  flightTableElement.innerHTML = "";
+
+  // Display loading message while fetching flight data
+  flightTableElement.innerHTML = '<p class="text-center">Loading flight information...</p>';
+
+  // Fetch flight data and display it
+  getFlightInfo(selectedDate, selectedAirline)
+    .then(function (flightData) {
+      // Display the flight data
+      displayFlightData(flightData, flightTableElement); // Pass flightData directly to displayFlightData
+    })
+    .catch(function (error) {
+      console.error(error);
+      flightTableElement.innerHTML = '<p class="text-center">Failed to fetch flight information.</p>'; // Display error message
+    });
+}
 
 // Event listener for airline buttons
 var airlineButtons = document.querySelectorAll("#language-buttons button");
+
 airlineButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-
-        airlineButtons.forEach(function (btn) {
-            return btn.classList.remove("selected");
-        });
-        this.classList.add("selected");
-
-        var selectedDate = datetimepicker.value;
-        var selectedAirline = this.dataset.language;
-        getFlightInfo(selectedDate, selectedAirline);
-    });
+  button.addEventListener("click", handleButtonClick);
 });
