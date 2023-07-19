@@ -95,6 +95,11 @@ function handleButtonClick() {
   // Display loading message while fetching flight data
   flightTableElement.innerHTML =
     '<p class="text-center">Loading flight information...</p>';
+  // API for weather
+  function getWeather(cityName) {
+    var url =
+      "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&appid={API key}";
+  }
 
   // Fetch flight data and display it
   getFlightInfo(selectedDate, selectedAirline)
