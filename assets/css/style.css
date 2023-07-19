@@ -1,34 +1,43 @@
-
-header.hero {
-  padding-top: 20px;
-  border-bottom: 7px solid blue;
-  padding-bottom: 20px;
-  background-color: rgb(6, 20, 97);
-  color: azure;
-  font-weight: bold;
+.hero.is-primary-custom {
+  background-color: #062e72;
+  color: white;
+  border-bottom: 8px solid blue;
 }
-
-.card-body {
-  overflow-y: auto;
-}
-
-.row-padding {
-  padding: 20px;
-}
-
-.bg-steel-grey {
-  background-color: blue !important;
+.title.is-1,
+.subtitle.is-5 {
+  text-align: center;
   color: white;
 }
 
-.card-height {
-  height: 500px;
+.card.has-background-blue-custom {
+  background-color: blue;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid #ccc;
-  color: black;
+.buttons.is-align-items-center {
+  justify-content: center;
+}
+.button.is-primary {
+  background-color: #1d2533;
+  border-color: white;
+}
+.button.is-primary:hover {
+  background-color: #545f60bd;
+  border-color: white;
 }
 
+.button.is-rounded {
+  border-radius: 10px; 
+}
+
+/* .label {
+  color: white;
+} */
+.card.is-primary-custom {
+  background-color: #062e72;
+}
+/* .card-content.is-primary-custom {
+  padding: 1.5rem;
+} */
+.subtitle.is-6 {
+  color: white;
+}
