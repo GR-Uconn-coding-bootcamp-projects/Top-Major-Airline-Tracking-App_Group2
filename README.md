@@ -29,7 +29,8 @@ Technologies used:
 - GitHub
 - https://openweathermap.org/api
 - https://rapidapi.com/apidojo/api/flight-radar1/
-- Link to deployed live URL [here.](https://gr-uconn-coding-bootcamp-projects.github.io/Top-Major-Airline-Tracking-App_Group2/)
+
+Link to deployed live URL [here.](https://gr-uconn-coding-bootcamp-projects.github.io/Top-Major-Airline-Tracking-App_Group2/)
 
 You can find code repo [here.](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2)
 
