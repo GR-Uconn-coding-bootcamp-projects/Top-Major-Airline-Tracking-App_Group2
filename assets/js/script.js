@@ -1,5 +1,28 @@
 // Group-2 project-1 javascript code here
 
+// Function to fetch airport information based on airport identifier
+async function getAirportInfo(ident) {
+  var url = 'https://flightera-flight-data.p.rapidapi.com/airport/info?ident=' + ident;
+  var options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'f7d877680dmsha7feb8c863ba1bbp1af32djsn15b6469abb35',
+      'X-RapidAPI-Host': 'flightera-flight-data.p.rapidapi.com'
+    }
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+
+    // Return only the name of the airport from the first entry in the result array
+    return result[0].name;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 // Function to fetch flight information based on the selected date and airline
 function getFlightInfo(date, airline) {
   var ident = airline.toLowerCase();
@@ -21,11 +44,24 @@ function getFlightInfo(date, airline) {
     .then(function (response) {
       return response.json();
     })
-    .then(function (result) {
+    .then(async function (result) {
       console.log("API response:", result); // Log the API response
 
-      // Process the flight information and return the data
-      return result.flights; // Return the "flights" property from the result object
+      // Process the flight information and replace identifiers with names
+      const flightsWithAirportNames = await Promise.all(
+        result.flights.map(async (flight) => {
+          const departureName = await getAirportInfo(flight.departure_ident);
+          const destinationName = await getAirportInfo(flight.arrival_ident);
+          return {
+            ...flight,
+            departure_ident: departureName,
+            arrival_ident: destinationName,
+          };
+        })
+      );
+
+      // Return the data with airport names
+      return flightsWithAirportNames;
     })
     .catch(function (error) {
       console.error(error);
@@ -40,7 +76,7 @@ function displayFlightData(flightData, flightTableElement) {
   if (flightData && flightData.length > 0) {
     // Create the flight table
     var flightTable = document.createElement("table");
-    flightTable.classList.add("table"); // Add the "table" class for Bootstrap styling
+    flightTable.classList.add("table"); 
 
     // Create the table headers
     var tableHeaders = document.createElement("tr");
