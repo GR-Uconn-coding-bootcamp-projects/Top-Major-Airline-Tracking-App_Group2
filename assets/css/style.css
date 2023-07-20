@@ -8,7 +8,11 @@
   text-align: center;
   color: white;
 }
-
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 .card.has-background-blue-custom {
   background-color: blue;
 }
@@ -26,7 +30,7 @@
 }
 
 .button.is-rounded {
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 /* .label {
