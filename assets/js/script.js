@@ -28,7 +28,6 @@ function getAirportInfo(ident) {
       return { name, city, country };
     })
     .catch(error => {
-      // Handle fetch errors
       console.error(error);
       throw error;
     });
@@ -136,13 +135,14 @@ async function getWeatherInfo(cityName, countryCode) {
     const temperatureKelvin = data.main.temp;
     const temperatureFahrenheit = Math.round((temperatureKelvin - 273.15) * 9/5 + 32);
     const humidity = data.main.humidity;
-    const windSpeed = data.wind.speed;
+    const windSpeedMetersPerSecond = data.wind.speed;
+    const windSpeedMilesPerHour = Math.round(windSpeedMetersPerSecond * 2.237); 
     const feelsLikeKelvin = data.main.feels_like;
     const feelsLikeFahrenheit = Math.round((feelsLikeKelvin - 273.15) * 9/5 + 32);
     
 
     // Return an object with the weather data, including the temperature in Fahrenheit
-    return { temperature: temperatureFahrenheit, humidity, windSpeed, feelsLike: feelsLikeFahrenheit };
+    return { temperature: temperatureFahrenheit, humidity, windSpeed: windSpeedMetersPerSecond, feelsLike: feelsLikeFahrenheit };
   } catch (error) {
     console.error(error);
     throw error;
@@ -152,6 +152,7 @@ async function getWeatherInfo(cityName, countryCode) {
 // Function to display selected flight details in the "Selected Flight Destination Details" card
 function displaySelectedFlightDetails(selectedFlight) {
   document.getElementById('selectedFlightName').innerText = selectedFlight.flnr;
+  document.getElementById('selectedAirportName').innerText = selectedFlight.arrival_ident;
   document.getElementById('selectedFlightCity').innerText = selectedFlight.arrival_city;
   document.getElementById('selectedFlightCountry').innerText = selectedFlight.arrival_country;
 
@@ -159,14 +160,13 @@ function displaySelectedFlightDetails(selectedFlight) {
   getWeatherInfo(selectedFlight.arrival_city, selectedFlight.arrival_country)
     .then(weatherInfo => {
       // Display weather information
-      document.getElementById('selectedFlightTemperature').innerText = weatherInfo.temperature;
-      document.getElementById('selectedFlightHumidity').innerText = weatherInfo.humidity;
-      document.getElementById('selectedFlightWindSpeed').innerText = weatherInfo.windSpeed;
-      document.getElementById('selectedFlightFeelsLike').innerText = weatherInfo.feelsLike;
+      document.getElementById('selectedFlightTemperature').innerText = weatherInfo.temperature + ' °F';
+      document.getElementById('selectedFlightHumidity').innerText = weatherInfo.humidity + ' %';
+      document.getElementById('selectedFlightWindSpeed').innerText = weatherInfo.windSpeed + ' mph'; 
+      document.getElementById('selectedFlightFeelsLike').innerText = weatherInfo.feelsLike + ' °F';
     })
     .catch(error => {
       console.error(error);
-      // Handle weather fetch errors
     });
 }
 
