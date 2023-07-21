@@ -1,9 +1,9 @@
 // Group-2 project-1 javascript code here
 
 // Function to fetch airport information based on airport identifier
-async function getAirportInfo(ident) {
-  var url = 'https://flightera-flight-data.p.rapidapi.com/airport/info?ident=' + ident;
-  var options = {
+function getAirportInfo(ident) {
+  const url = 'https://flightera-flight-data.p.rapidapi.com/airport/info?ident=' + ident;
+  const options = {
     method: 'GET',
     headers: {
       'X-RapidAPI-Key': 'f7d877680dmsha7feb8c863ba1bbp1af32djsn15b6469abb35',
@@ -11,16 +11,26 @@ async function getAirportInfo(ident) {
     }
   };
 
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
+  return fetch(url, options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Extract the name, city, and country from the first entry in the result array
+      const name = data[0].name;
+      const city = data[0].city;
+      const country = data[0].country;
 
-    // Return only the name of the airport from the first entry in the result array
-    return result[0].name;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+      // Return an object with the name, city, and country properties
+      return { name, city, country };
+    })
+    .catch(error => {
+      console.error(error);
+      throw error;
+    });
 }
 
 // Function to fetch flight information based on the selected date and airline
@@ -41,21 +51,23 @@ function getFlightInfo(date, airline) {
   };
 
   return fetch(url, options)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(async function (result) {
+    .then(response => response.json())
+    .then(async result => {
       console.log("API response:", result); // Log the API response
 
       // Process the flight information and replace identifiers with names
       const flightsWithAirportNames = await Promise.all(
-        result.flights.map(async (flight) => {
-          const departureName = await getAirportInfo(flight.departure_ident);
-          const destinationName = await getAirportInfo(flight.arrival_ident);
+        result.flights.map(async flight => {
+          const departureInfo = await getAirportInfo(flight.departure_ident);
+          const destinationInfo = await getAirportInfo(flight.arrival_ident);
           return {
             ...flight,
-            departure_ident: departureName,
-            arrival_ident: destinationName,
+            departure_ident: departureInfo.name,
+            departure_city: departureInfo.city,
+            departure_country: departureInfo.country,
+            arrival_ident: destinationInfo.name,
+            arrival_city: destinationInfo.city,
+            arrival_country: destinationInfo.country,
           };
         })
       );
@@ -63,7 +75,7 @@ function getFlightInfo(date, airline) {
       // Return the data with airport names
       return flightsWithAirportNames;
     })
-    .catch(function (error) {
+    .catch(error => {
       console.error(error);
       throw error;
     });
@@ -111,6 +123,53 @@ function displayFlightData(flightData, flightTableElement) {
   }
 }
 
+async function getWeatherInfo(cityName, countryCode) {
+  const apiKey = 'fe4b0b9029bdf3ee27d36bbdc8d8bf37';
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&appid=${apiKey}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    // Extract the desired weather information
+    const temperatureKelvin = data.main.temp;
+    const temperatureFahrenheit = Math.round((temperatureKelvin - 273.15) * 9/5 + 32);
+    const humidity = data.main.humidity;
+    const windSpeedMetersPerSecond = data.wind.speed;
+    const windSpeedMilesPerHour = Math.round(windSpeedMetersPerSecond * 2.237); 
+    const feelsLikeKelvin = data.main.feels_like;
+    const feelsLikeFahrenheit = Math.round((feelsLikeKelvin - 273.15) * 9/5 + 32);
+    
+
+    // Return an object with the weather data, including the temperature in Fahrenheit
+    return { temperature: temperatureFahrenheit, humidity, windSpeed: windSpeedMetersPerSecond, feelsLike: feelsLikeFahrenheit };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// Function to display selected flight details in the "Selected Flight Destination Details" card
+function displaySelectedFlightDetails(selectedFlight) {
+  document.getElementById('selectedFlightName').innerText = selectedFlight.flnr;
+  document.getElementById('selectedAirportName').innerText = selectedFlight.arrival_ident;
+  document.getElementById('selectedFlightCity').innerText = selectedFlight.arrival_city;
+  document.getElementById('selectedFlightCountry').innerText = selectedFlight.arrival_country;
+
+  // Fetch weather information and display it
+  getWeatherInfo(selectedFlight.arrival_city, selectedFlight.arrival_country)
+    .then(weatherInfo => {
+      // Display weather information
+      document.getElementById('selectedFlightTemperature').innerText = weatherInfo.temperature + ' °F';
+      document.getElementById('selectedFlightHumidity').innerText = weatherInfo.humidity + ' %';
+      document.getElementById('selectedFlightWindSpeed').innerText = weatherInfo.windSpeed + ' mph'; 
+      document.getElementById('selectedFlightFeelsLike').innerText = weatherInfo.feelsLike + ' °F';
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
 // Function to handle button click event
 function handleButtonClick() {
   var selectedDate = datetimepicker.value;
@@ -131,22 +190,32 @@ function handleButtonClick() {
   // Display loading message while fetching flight data
   flightTableElement.innerHTML =
     '<p class="text-center">Loading flight information...</p>';
-  // API for weather
-  function getWeather(cityName) {
-    var url =
-      "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&appid={API key}";
-  }
 
   // Fetch flight data and display it
   getFlightInfo(selectedDate, selectedAirline)
     .then(function (flightData) {
       // Display the flight data
-      displayFlightData(flightData, flightTableElement); // Pass flightData directly to displayFlightData
+      displayFlightData(flightData, flightTableElement);
+
+      // Add click event listener to flnr links
+      const flnrLinks = document.querySelectorAll('a[href="#"]');
+      flnrLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+          event.preventDefault();
+          const flnr = this.innerText;
+
+          // Find the selected flight from the flightData
+          const selectedFlight = flightData.find(flight => flight.flnr === flnr);
+          if (selectedFlight) {
+            displaySelectedFlightDetails(selectedFlight);
+          }
+        });
+      });
     })
     .catch(function (error) {
       console.error(error);
       flightTableElement.innerHTML =
-        '<p class="text-center">Failed to fetch flight information.</p>'; // Display error message
+        '<p class="text-center">Failed to fetch flight information.</p>';
     });
 }
 
