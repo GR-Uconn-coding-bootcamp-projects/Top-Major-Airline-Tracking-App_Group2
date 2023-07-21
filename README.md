@@ -12,8 +12,6 @@ Building a Tracking App for Major Airlines using HTML, CSS, and JavaScript
 
 - Utilized topics to complete this assignment include HTML, CSS, and JavaScript.
 
-- More info coming soon.
-
 ## Installation
 
 This site was deployed using github pages.
