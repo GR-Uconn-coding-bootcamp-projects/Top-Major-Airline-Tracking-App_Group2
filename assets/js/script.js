@@ -88,7 +88,7 @@ function displayFlightData(flightData, flightTableElement) {
   if (flightData && flightData.length > 0) {
     // Create the flight table
     var flightTable = document.createElement("table");
-    flightTable.classList.add("table"); 
+    flightTable.classList.add("table");
 
     // Create the table headers
     var tableHeaders = document.createElement("tr");
@@ -133,13 +133,13 @@ async function getWeatherInfo(cityName, countryCode) {
 
     // Extract the desired weather information
     const temperatureKelvin = data.main.temp;
-    const temperatureFahrenheit = Math.round((temperatureKelvin - 273.15) * 9/5 + 32);
+    const temperatureFahrenheit = Math.round((temperatureKelvin - 273.15) * 9 / 5 + 32);
     const humidity = data.main.humidity;
     const windSpeedMetersPerSecond = data.wind.speed;
-    const windSpeedMilesPerHour = Math.round(windSpeedMetersPerSecond * 2.237); 
+    const windSpeedMilesPerHour = Math.round(windSpeedMetersPerSecond * 2.237);
     const feelsLikeKelvin = data.main.feels_like;
-    const feelsLikeFahrenheit = Math.round((feelsLikeKelvin - 273.15) * 9/5 + 32);
-    
+    const feelsLikeFahrenheit = Math.round((feelsLikeKelvin - 273.15) * 9 / 5 + 32);
+
 
     // Return an object with the weather data, including the temperature in Fahrenheit
     return { temperature: temperatureFahrenheit, humidity, windSpeed: windSpeedMetersPerSecond, feelsLike: feelsLikeFahrenheit };
@@ -162,12 +162,21 @@ function displaySelectedFlightDetails(selectedFlight) {
       // Display weather information
       document.getElementById('selectedFlightTemperature').innerText = weatherInfo.temperature + ' °F';
       document.getElementById('selectedFlightHumidity').innerText = weatherInfo.humidity + ' %';
-      document.getElementById('selectedFlightWindSpeed').innerText = weatherInfo.windSpeed + ' mph'; 
+      document.getElementById('selectedFlightWindSpeed').innerText = weatherInfo.windSpeed + ' mph';
       document.getElementById('selectedFlightFeelsLike').innerText = weatherInfo.feelsLike + ' °F';
+
+      //Ensure the data is save in local storage
+      localStorage.setItem('selectedFLight', JSON.stringify(selectedFlight));
     })
     .catch(error => {
       console.error(error);
     });
+}
+
+// Function to retrieve stored flight data from local storage
+function getStoredFlightData() {
+  const storedFlightData = localStorage.getItem('selectedFlight');
+  return storedFlightData ? JSON.parse(storedFlightData) : null;
 }
 
 // Function to handle button click event
@@ -190,6 +199,12 @@ function handleButtonClick() {
   // Display loading message while fetching flight data
   flightTableElement.innerHTML =
     '<p class="text-center">Loading flight information...</p>';
+
+  // Check if there's stored flight data and display it
+  const storedFlightData = getStoredFlightData();
+  if (storedFlightData) {
+    displaySelectedFlightDetails(storedFlightData);
+  }
 
   // Fetch flight data and display it
   getFlightInfo(selectedDate, selectedAirline)
@@ -224,4 +239,12 @@ var airlineButtons = document.querySelectorAll("#language-buttons button");
 
 airlineButtons.forEach(function (button) {
   button.addEventListener("click", handleButtonClick);
+});
+
+// Load stored flight data on page load
+document.addEventListener('DOMContentLoaded', function () {
+  const storedFlightData = getStoredFlightData();
+  if (storedFlightData) {
+    displaySelectedFlightDetails(storedFlightData);
+  }
 });
