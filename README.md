@@ -3,7 +3,7 @@
 Building a Tracking App for Major Airlines using HTML, CSS, and JavaScript
 
 ## Background
-For this project, the goal is to create an app that focuses on catering to those who want to maximize their travel experience. The motivation of building this app is to allow those who travel have an enhanced experience by recieving immediate results on the weather of their destinations. This project showcases all of the knowledge learned in the UConn Coding Bootcamp Cohort as to date. 
+For this project, the goal is to create an app that focuses on catering to those who want to maximize their travel experience. The motivation of building this app is to allow those who travel have an enhanced experience by receiving immediate results on the weather of their destinations. This project showcases all of the knowledge learned in the UConn Coding Bootcamp Cohort as to date. 
 
 ## Description
 
@@ -19,7 +19,7 @@ For this project, the goal is to create an app that focuses on catering to those
 ## Mock-Up
 The following screenshot shows the web application's appearance and functionality of the Top Major Airline Tracking App :
 
-![Top Major Airline Tracking App](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2/assets/112992245/0c502eed-47bd-48d5-a002-298e2a399cd7)
+![Top Major Airline Tracking App](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2/assets/112992245/3e81a7f7-3ffa-4913-85c3-ac9c06f940ee)
 
 
 ## Installation
