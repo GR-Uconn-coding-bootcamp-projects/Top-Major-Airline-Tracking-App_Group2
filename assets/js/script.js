@@ -135,13 +135,22 @@ async function getWeatherInfo(cityName, countryCode) {
     const temperatureKelvin = data.main.temp;
     const temperatureFahrenheit = Math.round((temperatureKelvin - 273.15) * 9 / 5 + 32);
     const humidity = data.main.humidity;
-    const windSpeedMetersPerSecond = data.wind.speed;
+    const windSpeedMetersPerSec = data.wind.speed;
+    const windSpeedMph = Math.round(windSpeedMetersPerSec * 2.237);
     const feelsLikeKelvin = data.main.feels_like;
     const feelsLikeFahrenheit = Math.round((feelsLikeKelvin - 273.15) * 9 / 5 + 32);
-
+    const weatherIcon = data.weather[0].icon;
+    const weatherDescription = data.weather[0].description;
 
     // Return an object with the weather data, including the temperature in Fahrenheit
-    return { temperature: temperatureFahrenheit, humidity, windSpeed: windSpeedMetersPerSecond, feelsLike: feelsLikeFahrenheit };
+    return {
+      temperature: temperatureFahrenheit,
+      humidity,
+      windSpeed: windSpeedMph,
+      feelsLike: feelsLikeFahrenheit,
+      weatherIcon,
+      weatherDescription,
+    };
   } catch (error) {
     console.error(error);
     throw error;
@@ -163,12 +172,20 @@ function displaySelectedFlightDetails(selectedFlight) {
       document.getElementById('selectedFlightHumidity').innerText = weatherInfo.humidity + ' %';
       document.getElementById('selectedFlightWindSpeed').innerText = weatherInfo.windSpeed + ' mph';
       document.getElementById('selectedFlightFeelsLike').innerText = weatherInfo.feelsLike + ' °F';
+      document.getElementById('selectedFlightWeatherIcon').src = 'http://openweathermap.org/img/w/' + weatherInfo.weatherIcon + '.png';
+      document.getElementById('selectedFlightWeatherDescription').innerText = weatherInfo.weatherDescription;
 
       //Ensure the data is save in local storage
       localStorage.setItem('selectedFLight', JSON.stringify(selectedFlight));
     })
     .catch(error => {
       console.error(error);
+      document.getElementById('selectedFlightTemperature').innerText = 'N/A';
+      document.getElementById('selectedFlightHumidity').innerText = 'N/A';
+      document.getElementById('selectedFlightWindSpeed').innerText = 'N/A';
+      document.getElementById('selectedFlightFeelsLike').innerText = 'N/A';
+      document.getElementById('selectedFlightWeatherIcon').src = '';
+      document.getElementById('selectedFlightWeatherDescription').innerText = 'N/A';
     });
 }
 

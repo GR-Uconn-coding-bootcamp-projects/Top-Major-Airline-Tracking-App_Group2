@@ -1,199 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-    />
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
-    <title>Top Major Airline Flight Tracking App</title>
-  </head>
 
-  <body style="background-color: green">
-    <header class="hero is-primary-custom">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h1 class="title is-2 has-text-white">Top Major Airline Tracker</h1>
-          <p class="subtitle is-5 has-text-white">
-            (Click on one of the major airlines below to retrieve flight
-            information)
-          </p>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+  <title>Top Major Airline Flight Tracking App</title>
+</head>
+
+<body style="background-color: green">
+  <header class="hero is-primary-custom">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-2 has-text-white">Top Major Airline Tracker</h1>
+        <p class="subtitle is-5 has-text-white">
+          (Click on one of the major airlines below to retrieve flight
+          information)
+        </p>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main class="section">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-3" style="padding: 15px">
-            <div class="card mb-4 has-background-grey-lighter">
-              <div class="card-content">
-                <div class="content">
+  <main class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-3" style="padding: 15px">
+          <div class="card mb-4 has-background-grey-lighter">
+            <div class="card-content">
+              <div class="content">
+                <p>
+                  <strong>Date and Time:</strong>
+                  <input type="text" id="datetimepicker" class="input" />
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card has-background-blue-custom has-text-white p-4">
+            <div class="card-content">
+              <h2 class="title is-5 has-text-white has-text-centered">
+                Top 5 Major Airlines List:
+              </h2>
+              <div id="language-buttons" class="buttons is-centered">
+                <button data-language="DL" class="button is-primary is-fullwidth mb-2">
+                  Delta Airlines
+                </button>
+                <button data-language="UA" class="button is-primary is-fullwidth mb-2">
+                  United Airlines
+                </button>
+                <button data-language="AA" class="button is-primary is-fullwidth mb-2">
+                  American Airlines
+                </button>
+                <button data-language="B6" class="button is-primary is-fullwidth mb-2">
+                  Jetblue
+                </button>
+                <button data-language="WN" class="button is-primary is-fullwidth mb-2">
+                  Southwest Airlines
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-7">
+          <div class="card mb-4" style="width: 100%">
+            <div class="card-content has-background-grey-lighter">
+              <div class="field">
+                <label class="label" for="tags">Search by Destination:</label>
+                <div class="control">
+                  <input id="tags" class="input" type="text" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-4 p-4" style="height: 550px; overflow: scroll">
+            <div class="card-content">
+              <h6 class="subtitle is-6 has-text-black-bis">Routes</h6>
+              <div class="flight-table has-header-fixed" id="flightTable"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="card mb-3" style="width: 350px; height: 550px">
+            <div class="card-content" id="selectedFlightDetails">
+              <h6 class="has-text-black has-text-centered is-underlined" style="padding-bottom: 20px">
+                Selected Flight Destination Details
+              </h6>
+              <p><strong>Name:</strong> <span id="selectedFlightName"></span></p>
+              <p><strong>Destination Airport:</strong> <span id="selectedAirportName"></span></p>
+              <p><strong>City:</strong> <span id="selectedFlightCity"></span></p>
+              <p style="padding-bottom: 40px">
+                <strong>Country:</strong> <span id="selectedFlightCountry"></span>
+              </p>
+              <div class="card">
+                <div class="card-content">
+                  <h5 class="has-text-black has-text-centered is-underlined" style="padding-bottom: 20px">
+                    Current Weather
+                  </h5>
+                  <div class="has-text-centered" style="padding-bottom: 20px;">
+                    <img id="selectedFlightWeatherIcon" src="" alt="Weather Icon" style="width: 50px; height: 50px;">
+                    <p id="selectedFlightWeatherDescription"></p>
+                  </div>
                   <p>
-                    <strong>Date and Time:</strong>
-                    <input type="text" id="datetimepicker" class="input" />
+                    <strong>Temperature:</strong>
+                    <span id="selectedFlightTemperature"></span>
+                  </p>
+                  <p>
+                    <strong>Humidity:</strong>
+                    <span id="selectedFlightHumidity"></span>
+                  </p>
+                  <p>
+                    <strong>Wind Speed:</strong>
+                    <span id="selectedFlightWindSpeed"></span>
+                  </p>
+                  <p>
+                    <strong>Feels Like:</strong>
+                    <span id="selectedFlightFeelsLike"></span>
                   </p>
                 </div>
               </div>
             </div>
-
-            <div class="card has-background-blue-custom has-text-white p-4">
-              <div class="card-content">
-                <h2 class="title is-5 has-text-white has-text-centered">
-                  Top 5 Major Airlines List:
-                </h2>
-                <div id="language-buttons" class="buttons is-centered">
-                  <button
-                    data-language="DL"
-                    class="button is-primary is-fullwidth mb-2"
-                  >
-                    Delta Airlines
-                  </button>
-                  <button
-                    data-language="UA"
-                    class="button is-primary is-fullwidth mb-2"
-                  >
-                    United Airlines
-                  </button>
-                  <button
-                    data-language="AA"
-                    class="button is-primary is-fullwidth mb-2"
-                  >
-                    American Airlines
-                  </button>
-                  <button
-                    data-language="B6"
-                    class="button is-primary is-fullwidth mb-2"
-                  >
-                    Jetblue
-                  </button>
-                  <button
-                    data-language="WN"
-                    class="button is-primary is-fullwidth mb-2"
-                  >
-                    Southwest Airlines
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="column is-7">
-            <div class="card mb-4" style="width: 100%">
-              <div class="card-content has-background-grey-lighter">
-                <div class="field">
-                  <label class="label" for="tags">Search by Destination:</label>
-                  <div class="control">
-                    <input id="tags" class="input" type="text" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card mb-4 p-4" style="height: 450px; overflow: scroll">
-              <div class="card-content">
-                <h6 class="subtitle is-6 has-text-black-bis">Routes</h6>
-                <div
-                  class="flight-table has-header-fixed"
-                  id="flightTable"
-                ></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="column">
-            <div class="card mb-3" style="width: 350px; height: 500px">
-              <div class="card-content" id="selectedFlightDetails">
-                <h6
-                  class="has-text-black has-text-centered is-underlined"
-                  style="padding-bottom: 20px"
-                >
-                  Selected Flight Destination Details
-                </h6>
-                <p>
-                  <strong>Name:</strong> <span id="selectedFlightName"></span>
-                </p>
-                <p>
-                  <strong>Destination Airport:</strong>
-                  <span id="selectedAirportName"></span>
-                </p>
-                <p>
-                  <strong>City:</strong> <span id="selectedFlightCity"></span>
-                </p>
-                <p style="padding-bottom: 20px">
-                  <strong>Country:</strong>
-                  <span id="selectedFlightCountry"></span>
-                </p>
-                <h5
-                  class="has-text-black has-text-centered is-underlined"
-                  style="padding-bottom: 20px"
-                >
-                  Current Weather
-                </h5>
-                <p>
-                  <strong>Temperature:</strong>
-                  <span id="selectedFlightTemperature"></span>
-                </p>
-                <p>
-                  <strong>Humidity:</strong>
-                  <span id="selectedFlightHumidity"></span>
-                </p>
-                <p>
-                  <strong>Wind Speed:</strong>
-                  <span id="selectedFlightWindSpeed"></span>
-                </p>
-                <p>
-                  <strong>Feels Like:</strong>
-                  <span id="selectedFlightFeelsLike"></span>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
-    </main>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-      flatpickr("#datetimepicker", {
-        enableTime: true,
-        dateFormat: "Y-m-d\\TH:i:S.000\\Z",
-        time_24hr: true,
-      });
+    </div>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    flatpickr("#datetimepicker", {
+      enableTime: true,
+      dateFormat: "Y-m-d\\TH:i:S.000\\Z",
+      time_24hr: true,
+    });
 
-      $(function () {
-        var availableTags = [
-          "Boston, Massachusetts, USA (BOS)",
-          "Dallas, Texas, USA (DAL)",
-          "Dallas/Fort Worth, Texas, USA (DFW)",
-          "Hartford, CT, USA (BDL)",
-          "Los Angeles, CA, USA (LAX)",
-          "Orlando, FL, USA (MCO)",
-          "New York, USA (JFK)",
-          "New York, USA (LGA)",
-          "San Francisco, CA, USA (SFO)",
-        ];
-        $("#tags").autocomplete({
-          source: availableTags,
-        });
+    $(function () {
+      var availableTags = [
+        "Boston, Massachusetts, USA (BOS)",
+        "Dallas, Texas, USA (DAL)",
+        "Dallas/Fort Worth, Texas, USA (DFW)",
+        "Hartford, CT, USA (BDL)",
+        "Los Angeles, CA, USA (LAX)",
+        "Orlando, FL, USA (MCO)",
+        "New York, USA (JFK)",
+        "New York, USA (LGA)",
+        "San Francisco, CA, USA (SFO)",
+      ];
+      $("#tags").autocomplete({
+        source: availableTags,
       });
-    </script>
-    <script type="text/javascript" src="./assets/js/script.js"></script>
-    <footer class="footer">
-      <div class="content has-text-centered has-text-white">
-        <p>&copy; FTApp by Gil Rosario, Hailey Strauss, Maya McCann</p>
-      </div>
-    </footer>
-  </body>
+    });
+  </script>
+  <script type="text/javascript" src="./assets/js/script.js"></script>
+  <footer class="footer">
+    <div class="content has-text-centered has-text-white">
+      <p>&copy; FTApp by Gil Rosario, Hailey Strauss, Maya McCann</p>
+    </div>
+  </footer>
+</body>
+
 </html>
