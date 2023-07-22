@@ -1,9 +1,9 @@
 .hero.is-primary-custom {
   background-color: #062e72;
   color: white;
-  border-bottom: 8px solid blue;
+  border-bottom: 8px solid #062e72;
 }
-.title.is-1,
+
 .subtitle.is-5 {
   text-align: center;
   color: white;
@@ -14,7 +14,7 @@ header {
   z-index: 1000;
 }
 .card.has-background-blue-custom {
-  background-color: blue;
+  background-color: #062e72;
 }
 
 .buttons.is-align-items-center {
@@ -43,5 +43,15 @@ header {
   padding: 1.5rem;
 } */
 .subtitle.is-6 {
+  color: white;
+}
+.footer {
+  background: green;
+  height: 60px;
+  font-family: "Open Sans", sans-serif;
+  color: #ffffff;
+  padding: 20px;
+}
+content has-text-centered {
   color: white;
 }
