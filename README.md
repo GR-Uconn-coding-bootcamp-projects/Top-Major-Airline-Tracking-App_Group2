@@ -3,7 +3,7 @@
 Building a Tracking App for Major Airlines using HTML, CSS, and JavaScript
 
 ## Background
-For this project, the goal is to create an app that focuses on catering to those who want to maximize their travel expierience. The motivation of building this app is to make those who travel have an enhanced experience by recieving immediate results on the weather of their destination. This project showcases all of the knowledge learned in the UConn Coding Bootcamp Cohort (2023). 
+For this project, the goal is to create an app that focuses on catering to those who want to maximize their travel expierience. The motivation of building this app is to make those who travel have an enhanced experience by recieving immediate results on the weather of their destination. This project showcases all of the knowledge learned in the UConn Coding Bootcamp Cohort. 
 
 ## Description
 
