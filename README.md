@@ -19,7 +19,7 @@ For this project, the goal is to create an app that focuses on catering to those
 ## Mock-Up
 The following screenshot shows the web application's appearance and functionality of the Top Major Airline Tracking App :
 
-![Top Major Airline Tracking App](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2/assets/112992245/72180a67-a36c-4677-982b-4bb604d018c0)
+![Top Major Airline Tracking App](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2/assets/112992245/0c502eed-47bd-48d5-a002-298e2a399cd7)
 
 
 ## Installation
