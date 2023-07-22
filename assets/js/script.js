@@ -136,7 +136,6 @@ async function getWeatherInfo(cityName, countryCode) {
     const temperatureFahrenheit = Math.round((temperatureKelvin - 273.15) * 9 / 5 + 32);
     const humidity = data.main.humidity;
     const windSpeedMetersPerSecond = data.wind.speed;
-    const windSpeedMilesPerHour = Math.round(windSpeedMetersPerSecond * 2.237);
     const feelsLikeKelvin = data.main.feels_like;
     const feelsLikeFahrenheit = Math.round((feelsLikeKelvin - 273.15) * 9 / 5 + 32);
 
