@@ -1,7 +1,7 @@
 .hero.is-primary-custom {
   background-color: #062e72;
-  color: white;
-  border-bottom: 8px solid #062e72;
+  /* color: white; */
+  border-bottom: 5px solid #fcfdfe;
 }
 
 .subtitle.is-5 {
