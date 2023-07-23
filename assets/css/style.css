@@ -17,6 +17,10 @@ header {
   background-color: #062e72;
 }
 
+/* .card.has-background-card-color {
+  background-color: rgb(169, 146, 124);
+} */
+
 .buttons.is-align-items-center {
   justify-content: center;
 }
