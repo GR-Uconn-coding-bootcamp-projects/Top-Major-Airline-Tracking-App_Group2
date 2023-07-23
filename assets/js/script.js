@@ -189,7 +189,12 @@ function displaySelectedFlightDetails(selectedFlight) {
     });
 }
 
-// Function to retrieve stored flight data from local storage
+// Function to save the selected flight data to localStorage
+function saveSelectedFlightData(selectedFlight) {
+  localStorage.setItem('selectedFlight', JSON.stringify(selectedFlight));
+}
+
+// Function to retrieve the last selected flight data from localStorage on page load
 function getStoredFlightData() {
   const storedFlightData = localStorage.getItem('selectedFlight');
   return storedFlightData ? JSON.parse(storedFlightData) : null;
@@ -239,6 +244,9 @@ function handleButtonClick() {
           const selectedFlight = flightData.find(flight => flight.flnr === flnr);
           if (selectedFlight) {
             displaySelectedFlightDetails(selectedFlight);
+
+            // Save the selected flight data to localStorage
+            saveSelectedFlightData(selectedFlight);
           }
         });
       });
