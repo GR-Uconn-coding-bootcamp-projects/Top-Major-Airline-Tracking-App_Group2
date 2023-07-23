@@ -45,13 +45,7 @@ header {
 .subtitle.is-6 {
   color: white;
 }
-/* This is for the container for the flight destination */
-#selectedFlightDetails {
-  background-color: lightgrey;
-}
-.card-content {
-  border-color: #ffffff;
-}
+
 .footer {
   background: green;
   height: 60px;
