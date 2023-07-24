@@ -1,6 +1,5 @@
 .hero.is-primary-custom {
   background-color: #062e72;
-  /* color: white; */
   border-bottom: 5px solid #fcfdfe;
 }
 
@@ -16,10 +15,6 @@ header {
 .card.has-background-blue-custom {
   background-color: #062e72;
 }
-
-/* .card.has-background-card-color {
-  background-color: rgb(169, 146, 124);
-} */
 
 .buttons.is-align-items-center {
   justify-content: center;
@@ -37,15 +32,10 @@ header {
   border-radius: 10px;
 }
 
-/* .label {
-  color: white;
-} */
 .card.is-primary-custom {
   background-color: #062e72;
 }
-/* .card-content.is-primary-custom {
-  padding: 1.5rem;
-} */
+
 .subtitle.is-6 {
   color: white;
 }
@@ -66,6 +56,3 @@ h6.airline-title {
   color: #ffffff;
   padding: 20px;
 }
-/* content has-text-centered {
-  color: white;
-} */
