@@ -14,7 +14,7 @@ For this project, the goal is to build an Airline Tracking App that uses HTML, C
 
 - Utilized topics to complete this assignment include HTML, CSS, and JavaScript. This project showcases all of the knowledge learned in the UConn Coding Bootcamp Cohort as to date.
 
-- User Story: AS A traveler, I WANT to receive route information for the top five major airlines that includes flight status, destination details and weather information
+- User Story: AS A traveler, I WANT to receive route information for the top five major airlines that includes flight status, destination details and weather information, SO THAT I can easily track flight details
 
 The following screenshot shows the web application's appearance and functionality of the Top Major Airline Tracking App :
 
@@ -39,8 +39,8 @@ Technologies used:
 
 - jQuery
 - GitHub
-- https://openweathermap.org/api
-- https://rapidapi.com/apidojo/api/flight-radar1/
+- API: https://openweathermap.org/api
+- API: https://rapidapi.com/apidojo/api/flight-radar1/
 
 Link to deployed live URL [here.](https://gr-uconn-coding-bootcamp-projects.github.io/Top-Major-Airline-Tracking-App_Group2/)
 
