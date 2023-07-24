@@ -20,12 +20,12 @@ For this project, the goal is to create an app that focuses on catering to those
 The following screenshot shows the web application's appearance and functionality of the Top Major Airline Tracking App :
 
 This screenshot displays the initial view of this app :
-![FTApp A](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2/assets/112992245/282e3c5c-3ff2-434a-bca0-966a5999357a)
+![Top Major Airline Tracking App A](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2/assets/112992245/e8335204-1de7-4a1b-bdc3-0a9b3a53a019)
 
 
 This screenshot displays the final outcome of using this app :
 
-![FTApp B](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2/assets/112992245/f346be67-5c7e-4d70-8b22-b3de5fb5860b)
+![Top Major Airline Tracking App B](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2/assets/112992245/418ec27d-bc3b-4e5e-b3e8-0b8a3140c521)
 
 ## Installation
 
