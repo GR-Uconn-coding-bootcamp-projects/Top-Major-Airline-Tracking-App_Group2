@@ -160,7 +160,8 @@ async function getWeatherInfo(cityName, countryCode) {
 }
 
 // Function to display selected flight details in the "Selected Flight Destination Details" card
-function displaySelectedFlightDetails(selectedFlight) {
+function displaySelectedFlightDetails(selectedFlight, selectedAirline) {
+  document.getElementById('selectedAirlineName').innerText = selectedAirline;
   document.getElementById('selectedFlightName').innerText = selectedFlight.flnr;
   document.getElementById('selectedAirportName').innerText = selectedFlight.arrival_ident;
   document.getElementById('selectedFlightCity').innerText = selectedFlight.arrival_city;
@@ -256,7 +257,8 @@ function handleButtonClick(airlineName) {
           // Find the selected flight from the flightData
           const selectedFlight = flightData.find(flight => flight.flnr === flnr);
           if (selectedFlight) {
-            displaySelectedFlightDetails(selectedFlight);
+            // Call the displaySelectedFlightDetails function with airlineName
+            displaySelectedFlightDetails(selectedFlight, airlineName);
 
             // Save the selected flight data to localStorage
             saveSelectedFlightData(selectedFlight);
@@ -274,7 +276,8 @@ function handleButtonClick(airlineName) {
   document.addEventListener('DOMContentLoaded', function () {
     const storedFlightData = getStoredFlightData();
     if (storedFlightData) {
-      displaySelectedFlightDetails(storedFlightData);
+      // Call the displaySelectedFlightDetails function with airlineName
+      displaySelectedFlightDetails(storedFlightData, airlineName);
     }
   });
 }
