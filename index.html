@@ -16,7 +16,7 @@
     <div class="hero-body">
       <div class="container has-text-centered">
         <h1 class="title is-2 has-text-white">Top Major Airline Tracker</h1>
-        <img src="./assets/image/app.png" style="width:90px">
+        <img src="./assets/image/app.png" style="width: 100px">
         <p class="subtitle is-5 has-text-white">
           (Click on one of the major airlines below to retrieve flight
           information)
@@ -40,7 +40,7 @@
             </div>
           </div>
 
-          <div class="card has-background-blue-custom has-text-white p-4" style="border: 5; color: white;">
+          <div class="card has-background-blue-custom has-text-white p-4">
             <div class="card-content">
               <h2 class="title is-5 has-text-white has-text-centered">
                 Top 5 Major Airlines List:
@@ -70,7 +70,7 @@
           <div class="card mb-4" style="width: 100%">
             <div class="card-content has-background-grey-lighter">
               <div class="field">
-                <label class="label" for="tags">Search by Destination:</label>
+                <label class="label" for="tags">Search by Flight# or Destination:</label>
                 <div class="control">
                   <input id="tags" class="input" type="text" />
                 </div>
@@ -92,6 +92,7 @@
               <h6 class="has-text-black has-text-centered is-underlined" style="padding-bottom: 20px">
                 Selected Flight Destination Details
               </h6>
+              <p><strong>Airline:</strong> <span id="selectedAirlineName"></span></p>
               <p><strong>Name:</strong> <span id="selectedFlightName"></span></p>
               <p><strong>Destination Airport:</strong> <span id="selectedAirportName"></span></p>
               <p><strong>City:</strong> <span id="selectedFlightCity"></span></p>
