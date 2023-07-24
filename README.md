@@ -1,8 +1,7 @@
-# Top Major Airline Tracking App - Group 2
+# Top Major Airline Tracking App - Group 2 : FTApp 
 
 Building a Tracking App for Major Airlines using HTML, CSS, and JavaScript
 
-## Background
 For this project, the goal is to create an app that focuses on catering to those who want to maximize their travel experience. The motivation of building this app is to allow those who travel have an enhanced experience by receiving immediate results on the weather of their destinations. This project showcases all of the knowledge learned in the UConn Coding Bootcamp Cohort as to date. 
 
 ## Description
@@ -16,7 +15,6 @@ For this project, the goal is to create an app that focuses on catering to those
 - Utilized topics to complete this assignment include HTML, CSS, and JavaScript.
 
 
-## Mock-Up
 The following screenshot shows the web application's appearance and functionality of the Top Major Airline Tracking App :
 
 This screenshot displays the initial view of this app :
