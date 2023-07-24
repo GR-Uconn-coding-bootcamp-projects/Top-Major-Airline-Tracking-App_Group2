@@ -2,11 +2,12 @@
 
 // Function to fetch airport information based on airport identifier
 function getAirportInfo(ident) {
-  const url = 'https://flightera-flight-data.p.rapidapi.com/airport/info?ident=' + ident;
+  const apiKey = 'a320bbe97dmsh564ceed6c7f475dp1e974cjsn74528ca1271f';
+  const url = `https://flightera-flight-data.p.rapidapi.com/airport/info?ident=${encodeURIComponent(ident)}`;
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': 'f7d877680dmsha7feb8c863ba1bbp1af32djsn15b6469abb35',
+      'X-RapidAPI-Key': apiKey,
       'X-RapidAPI-Host': 'flightera-flight-data.p.rapidapi.com'
     }
   };
@@ -34,18 +35,19 @@ function getAirportInfo(ident) {
 }
 
 // Function to fetch flight information based on the selected date and airline
-function getFlightInfo(date, airline) {
+function getFlightInfo(date, airline, limit = 15) {
   var ident = airline.toLowerCase();
 
   var url =
-    "https://flightera-flight-data.p.rapidapi.com/airline/flights?ident=" +
+    "https://flightera-flight-data.p.rapidapi.com/airline/flights?time=" +
+    date +
+    "&ident=" +
     ident +
-    "&time=" +
-    date;
+    "&limit=" + limit;
   var options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "3717db3bafmsh3630d39920bf588p1025c6jsnd065f1276f3c",
+      "X-RapidAPI-Key": "a320bbe97dmsh564ceed6c7f475dp1e974cjsn74528ca1271f",
       "X-RapidAPI-Host": "flightera-flight-data.p.rapidapi.com",
     },
   };
@@ -57,7 +59,7 @@ function getFlightInfo(date, airline) {
 
       // Process the flight information and replace identifiers with names
       const flightsWithAirportNames = await Promise.all(
-        result.flights.map(async flight => {
+        result.flights.slice(0, limit).map(async flight => {
           const departureInfo = await getAirportInfo(flight.departure_ident);
           const destinationInfo = await getAirportInfo(flight.arrival_ident);
           return {
@@ -81,7 +83,7 @@ function getFlightInfo(date, airline) {
     });
 }
 
-function displayFlightData(flightData, flightTableElement) {
+function displayFlightData(flightData, flightTableElement, airlineName) {
   // Clear any existing flight data
   flightTableElement.innerHTML = "";
 
@@ -119,7 +121,7 @@ function displayFlightData(flightData, flightTableElement) {
   } else {
     // If no flight data available, display a message within the table
     flightTableElement.innerHTML =
-      '<p class="text-center">No flight information available.</p>';
+      '<p class="text-center">No flight information available for ' + airlineName + '.</p>';
   }
 }
 
@@ -175,8 +177,8 @@ function displaySelectedFlightDetails(selectedFlight) {
       document.getElementById('selectedFlightWeatherIcon').src = 'http://openweathermap.org/img/w/' + weatherInfo.weatherIcon + '.png';
       document.getElementById('selectedFlightWeatherDescription').innerText = weatherInfo.weatherDescription;
 
-      //Ensure the data is save in local storage
-      localStorage.setItem('selectedFLight', JSON.stringify(selectedFlight));
+      // Ensure the data is saved in local storage
+      localStorage.setItem('selectedFlight', JSON.stringify(selectedFlight));
     })
     .catch(error => {
       console.error(error);
@@ -201,7 +203,7 @@ function getStoredFlightData() {
 }
 
 // Function to handle button click event
-function handleButtonClick() {
+function handleButtonClick(airlineName) {
   var selectedDate = datetimepicker.value;
   var selectedAirline = this.dataset.language;
 
@@ -214,25 +216,36 @@ function handleButtonClick() {
   // Find the flight table element
   var flightTableElement = document.getElementById("flightTable");
 
-  // Clear any existing flight data
+  // Find the routes card-content element
+  var routesCardContent = document.querySelector(".card.mb-4.p-4 .card-content");
+
+  // Clear any existing flight data and previous airline title
   flightTableElement.innerHTML = "";
+  var previousAirlineTitle = routesCardContent.querySelector("h6");
+  if (previousAirlineTitle) {
+    routesCardContent.removeChild(previousAirlineTitle);
+  }
+
+  // Display the airline name as an h6 title within the routes card-content
+  var airlineTitle = document.createElement("h6");
+  airlineTitle.innerText = "Flights for " + airlineName;
+  airlineTitle.classList.add("airline-title"); // Add the custom CSS class
+
+  // Check if the routes card-content exists before inserting the title
+  if (routesCardContent) {
+    // Insert the airline title at the beginning of the routes card-content
+    routesCardContent.insertBefore(airlineTitle, routesCardContent.firstChild);
+  }
 
   // Display loading message while fetching flight data
   flightTableElement.innerHTML =
-    '<p class="text-center">Loading flight information...</p>';
-
-  // Check if there's stored flight data and display it
-  const storedFlightData = getStoredFlightData();
-  if (storedFlightData) {
-    displaySelectedFlightDetails(storedFlightData);
-  }
+    '<p class="text-center">Loading flight information for ' + airlineName + '...</p>';
 
   // Fetch flight data and display it
   getFlightInfo(selectedDate, selectedAirline)
     .then(function (flightData) {
       // Display the flight data
-      displayFlightData(flightData, flightTableElement);
-
+      displayFlightData(flightData, flightTableElement, airlineName);
       // Add click event listener to flnr links
       const flnrLinks = document.querySelectorAll('a[href="#"]');
       flnrLinks.forEach(link => {
@@ -256,19 +269,21 @@ function handleButtonClick() {
       flightTableElement.innerHTML =
         '<p class="text-center">Failed to fetch flight information.</p>';
     });
+
+  // Load stored flight data on page load
+  document.addEventListener('DOMContentLoaded', function () {
+    const storedFlightData = getStoredFlightData();
+    if (storedFlightData) {
+      displaySelectedFlightDetails(storedFlightData);
+    }
+  });
 }
 
 // Event listener for airline buttons
 var airlineButtons = document.querySelectorAll("#language-buttons button");
 
 airlineButtons.forEach(function (button) {
-  button.addEventListener("click", handleButtonClick);
-});
-
-// Load stored flight data on page load
-document.addEventListener('DOMContentLoaded', function () {
-  const storedFlightData = getStoredFlightData();
-  if (storedFlightData) {
-    displaySelectedFlightDetails(storedFlightData);
-  }
+  button.addEventListener("click", function () {
+    handleButtonClick.call(this, button.innerText);
+  });
 });
