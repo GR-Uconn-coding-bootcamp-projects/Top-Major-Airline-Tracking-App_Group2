@@ -1,12 +1,12 @@
 # Top Major Airline Tracking App - Group 2 : FTApp 
 
-Building a Tracking App for Major Airlines using HTML, CSS, and JavaScript
-
 For this project, the goal is to build an Airline Tracking App that uses HTML, CSS and JavaScript skills. This app will allow improved accessibility and usage by simplifying the need to want to track travel experiences for our app users. In addition, the benefits of using this application would to enhance travel experiences and have easy access to immediate results on travel plans. Our Top Major Airline Tracking App is referred to as FTApp. 
 
 ## Description
 
-- The purpose of this app is that it allows users to track the weather of the destinations of their flight.
+- The purpose of creating this app is that it allows users to retrieve flight information.
+
+- The FTApp allows our users to track the weather of the destinations of their flights, the routes of their destinations, receiving information on the destinations by choosing their airline, and tracking route information for a specific airline. 
 
 - The user will be able to retrieve their flight information by choosing the Date and Time and one of the Top 5 Major Airlines (Delta Airlines, United Airlines, American Airlines, Jetblue, Southwest Airlines).
 
@@ -14,6 +14,7 @@ For this project, the goal is to build an Airline Tracking App that uses HTML, C
 
 - Utilized topics to complete this assignment include HTML, CSS, and JavaScript. This project showcases all of the knowledge learned in the UConn Coding Bootcamp Cohort as to date.
 
+- User Story: AS A traveler, I WANT to receive route information for the top five major airlines that includes flight status, destination details and weather information
 
 The following screenshot shows the web application's appearance and functionality of the Top Major Airline Tracking App :
 
