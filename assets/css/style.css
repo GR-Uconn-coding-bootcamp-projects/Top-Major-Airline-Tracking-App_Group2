@@ -53,10 +53,10 @@ header {
 /* Custom CSS Styles for the Airline Title */
 h6.airline-title {
   text-align: center;
-  padding-bottom: 10px;
-  font-size: 18px;
+  padding-bottom: 15px;
+  font-size: 20px;
   font-weight: bold;
-  color: black;
+  color: rgb(163, 57, 25);
 }
 
 .footer {
