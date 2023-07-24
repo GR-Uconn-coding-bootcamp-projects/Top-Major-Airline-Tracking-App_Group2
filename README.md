@@ -23,7 +23,7 @@ This screenshot displays the initial view of this app :
 
 This screenshot displays the final outcome of using this app :
 
-![Top Major Airline Tracking App B](https://github.com/GR-Uconn-coding-bootcamp-projects/Top-Major-Airline-Tracking-App_Group2/assets/112992245/418ec27d-bc3b-4e5e-b3e8-0b8a3140c521)
+![Top Major Airline Tracking App ](https://github.com/mayamccann/My-Professional-Portfolio/assets/112992245/8c21305a-4c8e-4faf-8ae5-003e33ddf49f)
 
 ## Installation
 
