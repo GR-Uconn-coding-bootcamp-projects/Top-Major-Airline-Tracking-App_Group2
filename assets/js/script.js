@@ -2,7 +2,7 @@
 
 // Function to fetch airport information based on airport identifier
 function getAirportInfo(arrival_ident) {
-  const apiKey = 'a320bbe97dmsh564ceed6c7f475dp1e974cjsn74528ca1271f';
+  // const apiKey = 'a320bbe97dmsh564ceed6c7f475dp1e974cjsn74528ca1271f';
   const url = `https://flightera-flight-data.p.rapidapi.com/airport/info?ident=${encodeURIComponent(arrival_ident)}`;
   const options = {
     method: 'GET',
