@@ -7,7 +7,7 @@ function getAirportInfo(arrival_ident) {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': apiKey,
+      'X-RapidAPI-Key': 'a320bbe97dmsh564ceed6c7f475dp1e974cjsn74528ca1271f',
       'X-RapidAPI-Host': 'flightera-flight-data.p.rapidapi.com'
     }
   };
