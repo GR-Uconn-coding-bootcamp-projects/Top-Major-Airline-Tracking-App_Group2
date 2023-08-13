@@ -7,7 +7,7 @@ function getAirportInfo(arrival_ident) {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': 'a320bbe97dmsh564ceed6c7f475dp1e974cjsn74528ca1271f',
+      'X-RapidAPI-Key': '3717db3bafmsh3630d39920bf588p1025c6jsnd065f1276f3c',
       'X-RapidAPI-Host': 'flightera-flight-data.p.rapidapi.com'
     }
   };
@@ -47,7 +47,7 @@ function getFlightInfo(date, airline, limit = 15) {
   var options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "a320bbe97dmsh564ceed6c7f475dp1e974cjsn74528ca1271f",
+      "X-RapidAPI-Key": "3717db3bafmsh3630d39920bf588p1025c6jsnd065f1276f3c",
       "X-RapidAPI-Host": "flightera-flight-data.p.rapidapi.com",
     },
   };
